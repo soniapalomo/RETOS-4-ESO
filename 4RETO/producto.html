@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Producto</title>
+
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:40px;}
+.box{background:white;padding:30px;border-radius:10px;}
+input{padding:10px;margin-top:10px;}
+button{padding:10px;background:#0078d4;color:white;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>💻 Portátil educativo</h1>
+
+<p>Precio: 400€</p>
+
+<h3>Aplicar descuento</h3>
+
+<input id="code" placeholder="Código descuento">
+
+<button onclick="apply()">Aplicar</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+
+function apply(){
+    document.getElementById("msg").innerText =
+    "Código inválido";
+}
+
+</script>
+
+</body>
+</html>

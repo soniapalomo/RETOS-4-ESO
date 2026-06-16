@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Contacto</title>
+
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:40px;}
+.box{background:white;padding:30px;border-radius:10px;}
+input,textarea{width:100%;padding:10px;margin-top:10px;}
+button{margin-top:10px;padding:10px;background:#0078d4;color:white;}
+.response{margin-top:20px;color:green;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>📨 Contacto</h1>
+
+<p>Envíanos un mensaje:</p>
+
+<input id="nombre" placeholder="Nombre">
+<textarea id="mensaje" placeholder="Mensaje"></textarea>
+
+<button onclick="send()">Enviar</button>
+
+<div id="respuesta" class="response"></div>
+
+</div>
+
+<script>
+
+function send(){
+
+let msg = document.getElementById("mensaje").value;
+
+
+msg = msg.replace("<","&lt;").replace(">","&gt;");
+
+document.getElementById("respuesta").innerHTML =
+"Mensaje enviado: " + msg;
+
+}
+
+</script>
+
+</body>
+</html>
