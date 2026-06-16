@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel TIC Instituto</title>
+    <style>
+        body{ font-family: Arial, sans-serif; background:#f4f4f4; text-align:center; user-select: none; }
+        .container{ width:400px; margin:auto; margin-top:50px; background:white; padding:20px; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input{ width:90%; padding:10px; margin:10px; border: 1px solid #ccc; border-radius: 4px; }
+        button{ padding:10px 20px; background: #2563eb; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #1d4ed8; }
+        .news{ margin-top:30px; text-align:left; border-top: 1px solid #eee; padding-top: 15px; }
+        #msg { color: #dc2626; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body oncontextmenu="return false">
+
+<div class="container">
+    <h1>Panel TIC</h1>
+    <p style="color: #666; font-size: 14px;">Acceso restringido al personal de soporte</p>
+
+    <form onsubmit="return false;"> <input id="user" placeholder="Usuario" autocomplete="off"><br>
+        <input id="pass" type="text" placeholder="Contraseña" autocomplete="off"><br>
+        <button type="button" onclick="login()">Iniciar sesión</button>
+    </form>
+
+    <p id="msg"></p>
+
+    <div class="news">
+        <h3>📰 Noticias del Centro</h3>
+        <ul>
+            <li>Ganador concurso fotografía: Lucas Pérez</li>
+            <li>Torneo de baloncesto el próximo viernes</li>
+            <li>Nueva mascota del departamento TIC: Rocky</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Anti-F12 básico para proteger el motor de simulación
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123) return false;
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+
+    function login(){
+        let user = document.getElementById("user").value.trim();
+        let pass = document.getElementById("pass").value.trim();
+        let msg = document.getElementById("msg");
+
+        if (user === "" || pass === "") {
+            msg.innerHTML = "Por favor, rellena todos los campos.";
+            return;
+        }
+
+        // 🧠 MOTOR DE SIMULACIÓN SQL INJECTION REAL
+        let consultaSimulada = `usuario = '${user}' AND password = '${pass}'`;
+        
+        // Si usan comentarios de SQL (--), cortamos la cadena ahí
+        if (consultaSimulada.includes("--")) {
+            consultaSimulada = consultaSimulada.split("--")[0];
+        }
+
+        let tieneOr = /\bOR\b/i.test(consultaSimulada);
+        let tieneVerdad = false;
+        let igualdades = consultaSimulada.match(/([\w']+)\s*=\s*([\w']+)/g);
+        
+        if (igualdades) {
+            igualdades.forEach(eq => {
+                let partes = eq.split("=");
+                let izquierda = partes[0].trim().replace(/['"]/g, "");
+                let derecha = partes[1].trim().replace(/['"]/g, "");
+                
+                if (izquierda === derecha || derecha === "true" || izquierda === "true") {
+                    tieneVerdad = true;
+                }
+            });
+        }
+
+        // Condición de éxito
+        if ((pass.includes("'") || user.includes("'")) && tieneOr && tieneVerdad) {
+            // Redirección forzada y limpia
+            window.location.replace("panel.html");
+        } else {
+            msg.innerHTML = "❌ Error de autenticación: Usuario o contraseña incorrectos en la base de datos.";
+        }
+    }
+</script>
+</body>
+</html>
